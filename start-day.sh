@@ -33,7 +33,7 @@ echo ""
 if ! pgrep -f "Docker.app" > /dev/null; then
     echo "🐳 Docker Desktop is not running. Starting it now..."
     # This command opens the Docker application.
-    open -a Docker
+    open -a Docker.app
     echo "-> Docker is starting up in the background."
 else
     echo "✅ Docker Desktop is already running."

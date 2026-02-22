@@ -9,6 +9,22 @@ set -e
 echo "🐳 Docker Cleanup Script"
 echo "-------------------------"
 
+# Function to kill the Docker cagent process if it's running.
+kill_docker_cagent() {
+    echo "🔎 Checking for lingering Docker cagent process..."
+    if pgrep -f "Docker.app/Contents/Resources/bin/cagent" > /dev/null; then
+        echo "🔪 Lingering cagent process found. Attempting to kill it..."
+        pkill -f "Docker.app/Contents/Resources/bin/cagent"
+        echo "✅ cagent process killed."
+    else
+        echo "👍 No lingering cagent process found."
+    fi
+    echo ""
+}
+
+# Kill the cagent process before proceeding.
+kill_docker_cagent
+
 # Check if Docker is running.
 if ! docker info > /dev/null 2>&1; then
     echo "❌ Error: Docker does not seem to be running."
